@@ -1,14 +1,17 @@
 import React from "react";
-import { NewLine } from "components";
+import { NewLine, Strong } from "components";
 import Option from "components/Option/Option";
 import Storylet from "components/Storylet";
+import Citas from "./Citas";
 
 const LaCasa = () => {
   return (
     <Storylet
-      options={(story) => [<Option onClick={() => null}>Continuar</Option>]}>
-      La casa se levantaba sobre un pequeño promontorio, a apenas una treintena
-      de pasos de las frías aguas del Cantábrico.
+      options={(story) => [
+        <Option onClick={() => story.advance(Citas.key)}>Continuar</Option>,
+      ]}>
+      <Strong>La casa</Strong> se levantaba sobre un pequeño promontorio, a
+      apenas una treintena de pasos de las frías aguas del Cantábrico.
       <NewLine />
       Durante años Silvia había vivido en aquella casa. Recordaba cuando era
       niña y, desde la terraza en la parte de atrás, descendía cuidadosamente
@@ -29,7 +32,7 @@ const LaCasa = () => {
       ciudad, lejos de aquel lugar.
       <NewLine />
       Ahora su padre había muerto también y la casa se había quedado vacía. Ya
-      nadie visitava la pequeña cala…
+      nadie visitaba la pequeña cala…
       <NewLine />
       Sólo los cangrejos.
     </Storylet>

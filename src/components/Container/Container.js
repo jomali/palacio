@@ -14,7 +14,7 @@ const Offset = styled("div")(({ theme }) => ({
 }));
 
 const Container = React.forwardRef((props, ref) => {
-  const { children, maxWidth = "lg", ...otherProps } = props;
+  const { children, maxWidth = "lg", sx, ...otherProps } = props;
 
   const theme = useTheme();
 
@@ -54,6 +54,7 @@ const Container = React.forwardRef((props, ref) => {
             sm: theme.spacing(PADDING_SM),
             md: theme.spacing(PADDING_DEFAULT),
           },
+          ...sx,
         }}
         {...otherProps}>
         {children}

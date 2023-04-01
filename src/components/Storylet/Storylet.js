@@ -3,15 +3,11 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Zoom from "@mui/material/Zoom";
 import PropTypes from "prop-types";
-
-import Option from "components/Option/Option";
 import { useStory } from "components/StoryProvider";
 
 const Storylet = ({ children, options = () => [] }) => {
   const story = useStory();
   const currentOptions = options(story);
-
-  console.log("---", currentOptions);
 
   return (
     <Box
