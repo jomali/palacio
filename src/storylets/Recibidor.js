@@ -1,6 +1,8 @@
 import React from "react";
+import LoopLink from "components/LoopLink";
 import Option from "components/Option/Option";
 import Storylet from "components/Storylet";
+import { useStory } from "components/StoryProvider";
 import Cristalera from "./Cristalera";
 import Pasillo from "./Pasillo";
 import PatioDelantero from "./PatioDelantero";
@@ -17,8 +19,7 @@ const Recibidor = () => {
     "verdes",
   ];
 
-  const [color1, setColor1] = React.useState(colors[0]);
-  const [color2, setColor2] = React.useState(colors[3]);
+  const story = useStory();
 
   const getOptions = (story) => {
     const result = [];
@@ -56,11 +57,37 @@ const Recibidor = () => {
     return result;
   };
 
+  const color1 = story.state["recibidor.color1"] || colors[0];
+  const color2 = story.state["recibidor.color2"] || colors[3];
+
   return (
-    <Storylet options={(story) => getOptions(story)}>
+    <Storylet options={getOptions}>
       Los rayos de sol del exterior se cuelan por una cristalera que hay junto a
-      la puerta principal, bañando el pequeño recibidor de la casa de sus padres
-      en una mezcla de {color1} y {color2}.
+      la puerta principal, bañando el pequeño recibidor en una mezcla de{" "}
+      {story.hasVisited("recibidor") ? (
+        color1
+      ) : (
+        <LoopLink
+          onClick={(newValue) =>
+            story.update({ id: "recibidor.color1", value: newValue })
+          }
+          options={colors.filter((element) => element !== color2)}
+          value={color1}
+        />
+      )}{" "}
+      y{" "}
+      {story.hasVisited("recibidor") ? (
+        color2
+      ) : (
+        <LoopLink
+          onClick={(newValue) =>
+            story.update({ id: "recibidor.color2", value: newValue })
+          }
+          options={colors.filter((element) => element !== color1)}
+          value={color2}
+        />
+      )}
+      .
     </Storylet>
   );
 };

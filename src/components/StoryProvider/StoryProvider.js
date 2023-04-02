@@ -11,6 +11,7 @@ const ACTION = {
   endTransition: "endTransition",
   startRestart: "startRestart",
   startTransition: "startTransition",
+  update: "update",
 };
 
 export const StoryContext = React.createContext();
@@ -24,6 +25,7 @@ export const StoryProvider = (props) => {
       physique: 5,
     },
     lifePoints: 10,
+    other: {},
     storylets: {
       current: storylets.initial,
       last: null,
@@ -57,7 +59,7 @@ export const StoryProvider = (props) => {
         };
       case ACTION.startTransition:
         const visitedStorylets = previousState.storylets.visited;
-        visitedStorylets.add(action.payload);
+        visitedStorylets.add(previousState.storylets.current);
         return {
           ...previousState,
           storylets: {
@@ -65,6 +67,14 @@ export const StoryProvider = (props) => {
             last: previousState.storylets.current,
             next: action.payload,
             visited: visitedStorylets,
+          },
+        };
+      case ACTION.update:
+        return {
+          ...previousState,
+          other: {
+            ...previousState.other,
+            [action.payload?.id]: action.payload.value,
           },
         };
       default:
@@ -101,13 +111,19 @@ export const StoryProvider = (props) => {
   return (
     <StoryContext.Provider
       value={{
-        ...state,
+        attributes: state.attributes,
         go: (storyletKey) =>
           dispatch({
             type: ACTION.startTransition,
             payload: storyletKey,
           }),
         hasVisited: (storyletKey) => state.storylets.visited.has(storyletKey),
+        state: state.other,
+        update: (newValues) =>
+          dispatch({
+            type: ACTION.update,
+            payload: newValues,
+          }),
       }}>
       <Container maxWidth="sm">
         <StatusBar

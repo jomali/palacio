@@ -8,7 +8,7 @@ import Recibidor from "./Recibidor";
 import Salon from "./Salon";
 
 export default {
-  initial: LaCasa.key,
+  initial: Recibidor.key,
   values: [
     Citas,
     Cristalera,

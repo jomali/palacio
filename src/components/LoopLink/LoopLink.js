@@ -2,22 +2,27 @@ import React from "react";
 import Link from "@mui/material/Link";
 
 const LoopLink = (props) => {
-  const { onClick = () => null, values = [], ...otherProps } = props;
+  const {
+    onClick = () => null,
+    options = [],
+    sx = {},
+    value,
+    ...otherProps
+  } = props;
 
-  const [selected, setSelected] = React.useState(0);
-
-  return Boolean(values.length) ? (
+  return Boolean(options.length) ? (
     <Link
       onClick={() => {
-        const newValue = (selected + 1) % values.length;
-        setSelected(newValue);
-        onClick(newValue);
+        const selectedIndex =
+          options.findIndex((element) => element === value) || 0;
+        onClick(options[(selectedIndex + 1) % options.length]);
       }}
-      sx={{
-        cursor: "pointer",
-      }}>
-      {values[selected]}
+      sx={{ cursor: "pointer", ...sx }}
+      {...otherProps}>
+      {value}
     </Link>
+  ) : Boolean(value) ? (
+    value
   ) : null;
 };
 

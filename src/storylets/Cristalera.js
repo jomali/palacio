@@ -11,8 +11,8 @@ const Cristalera = () => {
       options={(story) => [
         <Option onClick={() => story.go(Recibidor.key)}>Continuar</Option>,
       ]}>
-      Por un momento permanece en pie en silencio, abstraída por segunda vez ese
-      día en la refracción de la luz y las motas de polvo en suspensión. Todo ha
+      Por un momento permanece en pie en silencio, abstraída por segunda vez hoy
+      en la refracción de la luz y las motas de polvo en suspensión. Todo ha
       terminado. Ahora que ya no tiene nada más que hacer aquí puede regresar a
       su propia casa y continuar con su vida normal.
       <NewLine />
