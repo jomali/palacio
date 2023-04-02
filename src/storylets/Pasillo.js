@@ -8,7 +8,7 @@ const Pasillo = () => {
   return (
     <Storylet
       options={(story) => [
-        <Option onClick={() => story.advance(Recibidor.key)}>
+        <Option onClick={() => story.go(Recibidor.key)}>
           Bajar al recibidor
         </Option>,
       ]}>
@@ -22,6 +22,14 @@ const Pasillo = () => {
       normal.
       <NewLine />
       Han sido vidrieras más que suficientes por un día.
+      !!------------------------------------------------------------------------------
+      Pasillo: switch (n) 1: ! ##Examine print "El corto corredor se encarga de
+      comunicar su [AntiguoDormitorioAdj] y [el DormitorioPrincipalAdj] con las
+      [Escalera](escaleras) de madera por las que se puede descender hasta [la
+      PlantaBajaAdj]."; !! TODO !! "Adornado con algunas viejas fotografías en
+      las paredes, el pasillo comunica su antiguo dormitorio [al n_obj], el
+      dormitorio principal [al e_obj], y las escaleras de madera que descienden
+      en curva hasta la planta baja, [al s_obj]."; new_line; return true;
     </Storylet>
   );
 };

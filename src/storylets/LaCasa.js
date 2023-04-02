@@ -8,7 +8,7 @@ const LaCasa = () => {
   return (
     <Storylet
       options={(story) => [
-        <Option onClick={() => story.advance(Citas.key)}>Continuar</Option>,
+        <Option onClick={() => story.go(Citas.key)}>Continuar</Option>,
       ]}>
       <Strong>La casa</Strong> se levantaba sobre un pequeño promontorio, a
       apenas una treintena de pasos de las frías aguas del Cantábrico.

@@ -1,4 +1,5 @@
 import Citas from "./Citas";
+import Cristalera from "./Cristalera";
 import LaCasa from "./LaCasa";
 import LaCeremonia from "./LaCeremonia";
 import Pasillo from "./Pasillo";
@@ -10,6 +11,7 @@ export default {
   initial: LaCasa.key,
   values: [
     Citas,
+    Cristalera,
     LaCasa,
     LaCeremonia,
     Pasillo,

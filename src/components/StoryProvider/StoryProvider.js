@@ -7,8 +7,10 @@ import useDebounce from "components/useDebounce/useDebounce";
 import storylets from "storylets";
 
 const ACTION = {
-  advance: "advance",
-  temp: "temp",
+  endRestart: "endRestart",
+  endTransition: "endTransition",
+  startRestart: "startRestart",
+  startTransition: "startTransition",
 };
 
 export const StoryContext = React.createContext();
@@ -21,73 +23,102 @@ export const StoryProvider = (props) => {
       locomotion: 5,
       physique: 5,
     },
-    currentStorylet: storylets.initial,
-    nextStorylet: null,
     lifePoints: 10,
-    options: [],
-    storylets: {},
+    storylets: {
+      current: storylets.initial,
+      last: null,
+      next: null,
+      visited: new Set(),
+    },
   };
   const theme = useTheme();
 
   const [state, dispatch] = React.useReducer((previousState, action) => {
     switch (action.type) {
-      case ACTION.advance:
+      case ACTION.endRestart:
+        return initialState;
+      case ACTION.endTransition:
         return {
           ...previousState,
-          currentStorylet: null,
-          nextStorylet: action.payload,
+          storylets: {
+            ...previousState.storylets,
+            current: previousState.storylets.next,
+            next: null,
+          },
         };
-      case ACTION.temp:
+      case ACTION.startRestart:
         return {
           ...previousState,
-          currentStorylet: previousState.nextStorylet,
-          nextStorylet: null,
+          restart: true,
+          storylets: {
+            ...previousState.storylets,
+            current: null,
+          },
+        };
+      case ACTION.startTransition:
+        const visitedStorylets = previousState.storylets.visited;
+        visitedStorylets.add(action.payload);
+        return {
+          ...previousState,
+          storylets: {
+            current: null,
+            last: previousState.storylets.current,
+            next: action.payload,
+            visited: visitedStorylets,
+          },
         };
       default:
         return previousState;
     }
   }, initialState);
 
-  const temp = useDebounce(
-    state.nextStorylet,
+  const selectedStorylet = storylets.values.find(
+    (element) => element.key === state.storylets.current
+  );
+
+  const restart = useDebounce(
+    state.restart,
     theme.transitions.duration.standard
   );
 
-  const addOption = (option) => null;
+  React.useEffect(() => {
+    if (Boolean(restart)) {
+      dispatch({ type: ACTION.endRestart });
+    }
+  }, [restart]);
 
-  const advance = (storyletKey) =>
-    dispatch({
-      type: ACTION.advance,
-      payload: storyletKey,
-    });
-
-  const initializeOptions = (options) => null;
-
-  const selectedStorylet = storylets.values.find(
-    (element) => element.key === state.currentStorylet
+  const nextStorylet = useDebounce(
+    state.storylets.next,
+    theme.transitions.duration.standard
   );
 
   React.useEffect(() => {
-    if (Boolean(temp)) {
-      dispatch({ type: ACTION.temp });
+    if (Boolean(nextStorylet)) {
+      dispatch({ type: ACTION.endTransition });
     }
-  }, [temp]);
+  }, [nextStorylet]);
 
   return (
     <StoryContext.Provider
       value={{
         ...state,
-        addOption,
-        advance,
-        initializeOptions,
+        go: (storyletKey) =>
+          dispatch({
+            type: ACTION.startTransition,
+            payload: storyletKey,
+          }),
+        hasVisited: (storyletKey) => state.storylets.visited.has(storyletKey),
       }}>
       <Container maxWidth="sm">
-        <StatusBar title={selectedStorylet?.title} />
+        <StatusBar
+          onRestart={() => dispatch({ type: ACTION.startRestart })}
+          title={selectedStorylet?.title}
+        />
         {storylets.values.map((element, index) => (
           <Slide
             direction="up"
             key={element.key}
-            in={element.key === state.currentStorylet}
+            in={element.key === state.storylets.current}
             mountOnEnter
             unmountOnExit>
             <Box sx={{ display: "flex", flexGrow: 1 }}>{element.storylet}</Box>

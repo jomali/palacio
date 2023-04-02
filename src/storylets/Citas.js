@@ -2,15 +2,13 @@ import React from "react";
 import { Emphasis, NewLine } from "components";
 import Option from "components/Option/Option";
 import Storylet from "components/Storylet";
-import LaCeremonia from "./LaCeremonia";
+import Recibidor from "./Recibidor";
 
 const Citas = () => {
   return (
     <Storylet
       options={(story) => [
-        <Option onClick={() => story.advance(LaCeremonia.key)}>
-          Continuar
-        </Option>,
+        <Option onClick={() => story.go(Recibidor.key)}>Continuar</Option>,
       ]}>
       <Emphasis>
         «Y entro en los campos y anchos palacios de la memoria, donde están los
