@@ -1,20 +1,7 @@
-import Citas from "./Citas";
-import LaCasa from "./LaCasa";
-import LaCeremonia from "./LaCeremonia";
-import Pasillo from "./Pasillo";
-import PatioDelantero from "./PatioDelantero";
-import Recibidor from "./Recibidor";
-import Salon from "./Salon";
+import laCasaStorylets from "./laCasa";
+import LaCasa from "./laCasa/LaCasa";
 
 export default {
   initial: LaCasa.key,
-  values: [
-    Citas,
-    LaCasa,
-    LaCeremonia,
-    Pasillo,
-    PatioDelantero,
-    Recibidor,
-    Salon,
-  ],
+  values: [...laCasaStorylets],
 };

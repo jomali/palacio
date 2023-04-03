@@ -8,7 +8,7 @@ const LaCeremonia = () => {
   return (
     <Storylet
       options={(story) => [
-        <Option onClick={() => story.advance(Recibidor.key)}>Continuar</Option>,
+        <Option onClick={() => story.go(Recibidor.key)}>Continuar</Option>,
       ]}>
       Ha cumplido con sus obligaciones por la mañana. Se ha encontrado con gente
       a la que no veía desde hacía años y a la que recordaba solo a medias, y

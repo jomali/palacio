@@ -1,5 +1,5 @@
 import React from "react";
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
@@ -23,7 +23,7 @@ const ElevationScroll = (props) => {
 };
 
 const StatusBar = (props) => {
-  const { title } = props;
+  const { onRestart, title } = props;
 
   const theme = useTheme();
 
@@ -43,9 +43,10 @@ const StatusBar = (props) => {
           <IconButton
             aria-label="profile"
             edge="end"
+            onClick={onRestart}
             size="large"
             sx={{ padding: 0 }}>
-            <SettingsRoundedIcon fontSize="inherit" />
+            <ReplayRoundedIcon fontSize="inherit" />
           </IconButton>
         </Toolbar>
       </AppBar>
