@@ -7,7 +7,7 @@ import { useStory } from "components/StoryProvider";
 
 const Storylet = ({ children, options = () => [] }) => {
   const story = useStory();
-  const currentOptions = options(story);
+  const currentOptions = options(story).filter((element) => Boolean(element));
 
   return (
     <Box

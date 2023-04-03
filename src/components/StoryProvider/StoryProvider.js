@@ -1,12 +1,15 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Fade from "@mui/material/Fade";
 import Slide from "@mui/material/Slide";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import { Container, StatusBar } from "components";
 import useDebounce from "components/useDebounce/useDebounce";
 import storylets from "storylets";
 
 const ACTION = {
+  changeTheme: "changeTheme",
   endRestart: "endRestart",
   endTransition: "endTransition",
   startRestart: "startRestart",
@@ -17,6 +20,30 @@ const ACTION = {
 export const StoryContext = React.createContext();
 
 export const StoryProvider = (props) => {
+  const theme = useTheme();
+
+  const blueTheme = createTheme({
+    palette: {
+      primary: {
+        accent: "#3c7480",
+        contrastText: "#000000",
+        main: "#6ba3af",
+      },
+      mode: "light",
+    },
+  });
+
+  const yellowTheme = createTheme({
+    palette: {
+      primary: {
+        accent: "#b17816",
+        contrastText: "#000000",
+        main: "#e7a748",
+      },
+      mode: "light",
+    },
+  });
+
   const initialState = {
     attributes: {
       intelligence: 5,
@@ -32,11 +59,16 @@ export const StoryProvider = (props) => {
       next: null,
       visited: new Set(),
     },
+    theme: theme,
   };
-  const theme = useTheme();
 
   const [state, dispatch] = React.useReducer((previousState, action) => {
     switch (action.type) {
+      case ACTION.changeTheme:
+        return {
+          ...previousState,
+          theme: yellowTheme,
+        };
       case ACTION.endRestart:
         return initialState;
       case ACTION.endTransition:
@@ -112,12 +144,17 @@ export const StoryProvider = (props) => {
     <StoryContext.Provider
       value={{
         attributes: state.attributes,
+        changeTheme: () =>
+          dispatch({
+            type: ACTION.changeTheme,
+          }),
         go: (storyletKey) =>
           dispatch({
             type: ACTION.startTransition,
             payload: storyletKey,
           }),
         hasVisited: (storyletKey) => state.storylets.visited.has(storyletKey),
+        restart: () => dispatch({ type: ACTION.startRestart }),
         state: state.other,
         update: (newValues) =>
           dispatch({
@@ -125,22 +162,26 @@ export const StoryProvider = (props) => {
             payload: newValues,
           }),
       }}>
-      <Container maxWidth="sm">
-        <StatusBar
-          onRestart={() => dispatch({ type: ACTION.startRestart })}
-          title={selectedStorylet?.title}
-        />
-        {storylets.values.map((element, index) => (
-          <Slide
-            direction="up"
-            key={element.key}
-            in={element.key === state.storylets.current}
-            mountOnEnter
-            unmountOnExit>
-            <Box sx={{ display: "flex", flexGrow: 1 }}>{element.storylet}</Box>
-          </Slide>
-        ))}
-      </Container>
+      <ThemeProvider theme={state.theme}>
+        <Container maxWidth="sm">
+          <StatusBar
+            onRestart={() => dispatch({ type: ACTION.startRestart })}
+            title={selectedStorylet?.title}
+          />
+          {storylets.values.map((element, index) => (
+            <Fade
+              direction="up"
+              key={element.key}
+              in={element.key === state.storylets.current}
+              mountOnEnter
+              unmountOnExit>
+              <Box sx={{ display: "flex", flexGrow: 1 }}>
+                {element.storylet}
+              </Box>
+            </Fade>
+          ))}
+        </Container>
+      </ThemeProvider>
     </StoryContext.Provider>
   );
 };
