@@ -1,5 +1,4 @@
 import React from "react";
-import { NewLine } from "components";
 import Option from "components/Option/Option";
 import Storylet from "components/Storylet";
 import Recibidor from "./Recibidor";
