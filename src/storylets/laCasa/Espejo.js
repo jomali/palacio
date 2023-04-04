@@ -4,8 +4,10 @@ import Option from "components/Option/Option";
 import Storylet from "components/Storylet";
 import Banno from "./Banno";
 
-const ElEspejo = () => {
-  const options = () => [<Option storylet={Banno.key}>Continuar</Option>];
+const Espejo = () => {
+  const options = () => [
+    <Option storylet={Banno.key}>Apartar la mirada</Option>,
+  ];
 
   return (
     <Storylet options={options}>
@@ -21,6 +23,6 @@ const ElEspejo = () => {
 
 export default {
   key: "banno.espejo",
-  storylet: <ElEspejo />,
+  storylet: <Espejo />,
   title: "La persona del otro lado",
 };

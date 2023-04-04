@@ -9,7 +9,8 @@ const Citas = () => {
     <Storylet
       options={(story) => [
         <Option onClick={() => story.go(Recibidor.key)}>Continuar</Option>,
-      ]}>
+      ]}
+    >
       <Emphasis>
         «Y entro en los campos y anchos palacios de la memoria, donde están los
         tesoros de innumerables imágenes de toda clase de cosas acarreadas por

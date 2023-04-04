@@ -10,7 +10,8 @@ const Cristalera = () => {
     <Storylet
       options={(story) => [
         <Option onClick={() => story.go(Recibidor.key)}>Continuar</Option>,
-      ]}>
+      ]}
+    >
       Por un momento permanece en pie en silencio, abstraída por segunda vez hoy
       en la refracción de la luz y las motas de polvo en suspensión. Todo ha
       terminado. Ahora que ya no tiene nada más que hacer aquí puede regresar a

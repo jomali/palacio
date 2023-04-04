@@ -6,7 +6,8 @@ const Strong = ({ children, ...otherProps }) => {
   return (
     <span
       style={{ fontWeight: theme.typography.fontWeightBold }}
-      {...otherProps}>
+      {...otherProps}
+    >
       {children}
     </span>
   );

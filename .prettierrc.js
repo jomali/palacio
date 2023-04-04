@@ -11,7 +11,7 @@ module.exports = {
   // end of the last line instead of being alone on the next line (does not
   // apply to self closing elements).
   // @see: https://prettier.io/docs/en/options.html#bracket-line
-  bracketSameLine: true,
+  bracketSameLine: false,
   // Print spaces between brackets in object literals.
   // @see: https://prettier.io/docs/en/options.html#bracket-spacing
   bracketSpacing: true,

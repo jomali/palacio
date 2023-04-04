@@ -1,11 +1,14 @@
 import React from "react";
-import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
+import styled from "@emotion/styled";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import AppBar from "@mui/material/AppBar";
+import Fade from "@mui/material/Fade";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
+import useDebounce from "components/useDebounce/useDebounce";
 
 const ElevationScroll = (props) => {
   const { children } = props;
@@ -22,10 +25,16 @@ const ElevationScroll = (props) => {
   });
 };
 
+const Gap = styled("span")(() => ({
+  flexGrow: 1,
+}));
+
 const StatusBar = (props) => {
-  const { onRestart, title } = props;
+  const { onMenuClick, title, titleTimeout = 0 } = props;
 
   const theme = useTheme();
+
+  const debouncedTitle = useDebounce(title, titleTimeout);
 
   return (
     <ElevationScroll>
@@ -33,20 +42,19 @@ const StatusBar = (props) => {
         position="fixed"
         sx={{
           backgroundColor: theme.palette.background.default,
-          color: "black",
-        }}>
+          color: theme.palette.common.black,
+        }}
+      >
         <Toolbar>
-          <Typography
-            sx={{ flexGrow: 1, fontWeight: theme.typography.fontWeightBold }}>
-            {title}
-          </Typography>
-          <IconButton
-            aria-label="profile"
-            edge="end"
-            onClick={onRestart}
-            size="large"
-            sx={{ padding: 0 }}>
-            <ReplayRoundedIcon fontSize="inherit" />
+          <Fade in={title === debouncedTitle}>
+            <Typography sx={{ fontWeight: theme.typography.fontWeightBold }}>
+              {debouncedTitle}
+            </Typography>
+          </Fade>
+
+          <Gap />
+          <IconButton aria-label="menu" edge="end" onClick={onMenuClick}>
+            <MenuRoundedIcon />
           </IconButton>
         </Toolbar>
       </AppBar>

@@ -27,14 +27,16 @@ const Recibidor = () => {
   const options = () => [
     <Option
       inactive={story.hasVisited(Cristalera.key)}
-      storylet={Cristalera.key}>
+      storylet={Cristalera.key}
+    >
       Mirar cristalera
     </Option>,
     <Option storylet={Salon.key}>Ir al salón</Option>,
     <Option storylet={Pasillo.key}>Subir al piso de arriba</Option>,
     <Option
       inactive={!story.hasVisited(Cristalera.key)}
-      storylet={PatioDelantero.key}>
+      storylet={PatioDelantero.key}
+    >
       Salir de allí
     </Option>,
   ];

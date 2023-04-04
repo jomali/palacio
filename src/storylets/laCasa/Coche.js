@@ -2,7 +2,6 @@ import React from "react";
 import { NewLine } from "components";
 import Option from "components/Option/Option";
 import Storylet from "components/Storylet";
-import Recibidor from "./Recibidor";
 
 // !!------------------------------------------------------------------------------
 // BotonArranque: switch (n)
@@ -70,8 +69,8 @@ import Recibidor from "./Recibidor";
 
 const Coche = () => {
   const options = (story) => [
-    <Option buttonVariant={"contained"} onClick={() => story.restart()}>
-      Continuar
+    <Option buttonVariant={"contained"} onClick={() => story.restart(true)}>
+      Finalizar
     </Option>,
   ];
 

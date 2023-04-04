@@ -11,7 +11,8 @@ const Llaves = () => {
         <Option onClick={() => story.go(Recibidor.key)}>
           Bajar al recibidor
         </Option>,
-      ]}>
+      ]}
+    >
       !!------------------------------------------------------------------------------
       Llaves: switch (n) 1: ! ##Examine (A) print "Además de las llaves de su
       coche y del piso en Madrid ahora tiene también las llaves heredadas de su

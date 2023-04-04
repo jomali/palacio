@@ -1,7 +1,9 @@
+import Inventario from "./Inventario";
 import laCasaStorylets from "./laCasa";
-import LaCasa from "./laCasa/LaCasa";
+import Recibidor from "./laCasa/Recibidor";
+import Recuerdos from "./Recuerdos";
 
 export default {
-  initial: LaCasa.key,
-  values: [...laCasaStorylets],
+  initial: Recibidor.key,
+  values: [...laCasaStorylets, Inventario, Recuerdos],
 };

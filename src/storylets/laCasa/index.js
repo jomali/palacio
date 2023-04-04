@@ -6,9 +6,8 @@ import Cocina from "./Cocina";
 import Cristalera from "./Cristalera";
 import DormitorioPrincipal from "./DormitorioPrincipal";
 import DormitorioSilvia from "./DormitorioSilvia";
-import ElEspejo from "./ElEspejo";
+import Espejo from "./Espejo";
 import LaCasa from "./LaCasa";
-import LaCeremonia from "./LaCeremonia";
 import Pasillo from "./Pasillo";
 import PatioDelantero from "./PatioDelantero";
 import Recibidor from "./Recibidor";
@@ -24,9 +23,8 @@ export default [
   Cristalera,
   DormitorioPrincipal,
   DormitorioSilvia,
-  ElEspejo,
+  Espejo,
   LaCasa,
-  LaCeremonia,
   Pasillo,
   PatioDelantero,
   Recibidor,

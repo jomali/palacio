@@ -2,14 +2,15 @@ import React from "react";
 import { NewLine } from "components";
 import Option from "components/Option/Option";
 import Storylet from "components/Storylet";
-import Recibidor from "./Recibidor";
+import Recibidor from "../laCasa/Recibidor";
 
 const LaCeremonia = () => {
   return (
     <Storylet
       options={(story) => [
         <Option onClick={() => story.go(Recibidor.key)}>Continuar</Option>,
-      ]}>
+      ]}
+    >
       Ha cumplido con sus obligaciones por la mañana. Se ha encontrado con gente
       a la que no veía desde hacía años y a la que recordaba solo a medias, y
       con muchos otros a los que directamente o bien no conocía o no recordaba

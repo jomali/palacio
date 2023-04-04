@@ -20,7 +20,8 @@ const LoopLink = (props) => {
         onClick(options[(selectedIndex + 1) % options.length]);
       }}
       sx={{ cursor: "pointer", ...sx }}
-      {...otherProps}>
+      {...otherProps}
+    >
       {value}
     </Link>
   ) : Boolean(value) ? (
