@@ -1,7 +1,7 @@
 import React from "react";
 import Option from "components/Option/Option";
 import Storylet from "components/Storylet";
-import ElEspejo from "./ElEspejo";
+import ElEspejo from "./Espejo";
 import Pasillo from "./Pasillo";
 
 // print "Diazepam. Sedantes. No tenía ni idea de que su padre estuviese tomando ninguna medicación.";

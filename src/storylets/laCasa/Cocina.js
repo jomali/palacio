@@ -30,8 +30,8 @@ const Cocina = () => {
 
   return (
     <Storylet options={options}>
-      Espaciosa y bien iluminada. Su padre ha debido ir añadiendo muebles y
-      electrodomésticos conforme los iba necesitando sin preocuparse del aspecto
+      Espaciosa y bien iluminada. Está claro que se han ido añadiendo muebles y
+      electrodomésticos conforme se iban necesitando sin preocuparse del aspecto
       del conjunto. El resultado es un <Emphasis>collage</Emphasis>. Hay un
       frigorífico de aspecto moderno y minimalista junto a una lavadora de al
       menos veinte años con marcas de óxido. Una cafetera de diseño en un

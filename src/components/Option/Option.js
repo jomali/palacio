@@ -57,7 +57,8 @@ const Option = (props) => {
       onClick={() => (Boolean(storylet) ? story.go(storylet) : onClick())}
       startIcon={getIcon()}
       variant={buttonVariant}
-      {...otherProps}>
+      {...otherProps}
+    >
       {children}
     </Button>
   ) : null;

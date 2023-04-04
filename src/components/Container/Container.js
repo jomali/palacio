@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { styled, useTheme } from "@mui/material/styles";
 import PropTypes from "prop-types";
+// import { DRAWER_WIDTH } from "../Drawer";
 
 export const PADDING_DEFAULT = 3;
 export const PADDING_SM = 2;
@@ -13,19 +14,43 @@ const Offset = styled("div")(({ theme }) => ({
   width: "100%",
 }));
 
+const Main = styled("main", {
+  shouldForwardProp: (prop) => prop !== "openMenu",
+})(({ theme, openMenu }) => ({
+  // display: "flex",
+  // flexDirection: "column",
+  // justifyContent: "center",
+  // minHeight: "100%",
+  // transition: theme.transitions.create("margin", {
+  //   easing: theme.transitions.easing.sharp,
+  //   duration: theme.transitions.duration.leavingScreen,
+  // }),
+  // marginRight: -DRAWER_WIDTH,
+  // ...(openMenu && {
+  //   transition: theme.transitions.create("margin", {
+  //     easing: theme.transitions.easing.easeOut,
+  //     duration: theme.transitions.duration.enteringScreen,
+  //   }),
+  //   marginRight: 0,
+  // }),
+}));
+
 const Container = React.forwardRef((props, ref) => {
-  const { children, maxWidth = "lg", sx, ...otherProps } = props;
+  const { children, maxWidth = "lg", openMenu, sx, ...otherProps } = props;
 
   const theme = useTheme();
 
   return (
-    <Box
+    <Main
+      openMenu={openMenu}
       sx={{
         display: "flex",
         flexDirection: "column",
+        flexGrow: 1,
         justifyContent: "center",
         minHeight: "100%",
-      }}>
+      }}
+    >
       <Offset />
       <Divider />
       <Box
@@ -34,7 +59,11 @@ const Container = React.forwardRef((props, ref) => {
           alignSelf: "center",
           display: "flex",
           flexGrow: 1,
-          margin: 0,
+          margin: {
+            xs: theme.spacing(PADDING_XS),
+            sm: theme.spacing(PADDING_SM),
+            md: theme.spacing(PADDING_DEFAULT),
+          },
           maxWidth: {
             xs: "100%",
             sm: maxWidth === "sm" ? theme.breakpoints.values.sm : undefined,
@@ -54,12 +83,14 @@ const Container = React.forwardRef((props, ref) => {
             sm: theme.spacing(PADDING_SM),
             md: theme.spacing(PADDING_DEFAULT),
           },
+          position: "relative",
           ...sx,
         }}
-        {...otherProps}>
+        {...otherProps}
+      >
         {children}
       </Box>
-    </Box>
+    </Main>
   );
 });
 

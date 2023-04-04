@@ -35,8 +35,8 @@ const App = () => {
         // "#888888", #CFF5F8
         // "#BBBBBB", #FF3FA4
         accent: "#3c7480",
-        contrastText: "#000000",
-        main: "#6ba3af",
+        contrastText: "#ffffff",
+        main: "#FF3FA4",
       },
       secondary: {
         accent: "#D26C2C",
