@@ -3,6 +3,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Div100vh from "react-div-100vh";
 import { StoryProvider } from "components";
+import Recuerdos from "sections/Recuerdos";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -50,7 +51,9 @@ const App = () => {
     <Div100vh>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <StoryProvider />
+        <StoryProvider>
+          <Recuerdos />
+        </StoryProvider>
       </ThemeProvider>
     </Div100vh>
   );

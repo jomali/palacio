@@ -17,6 +17,8 @@ import useStoryState from "./useStoryState";
 export const StoryContext = React.createContext();
 
 export const StoryProvider = (props) => {
+  const { children, ...otherProps } = props;
+
   const theme = useTheme();
   const storyState = useStoryState(storylets.initial);
 
@@ -57,34 +59,33 @@ export const StoryProvider = (props) => {
       }}
     >
       <ThemeProvider theme={theme}>
-        <Container maxWidth="sm" openMenu={openMenu}>
-          <StatusBar
-            onMenuClick={() => setOpenMenu(true)}
-            title={getTitle()}
-            titleTimeout={
-              storyState.data["currentSection"] === 1 ||
-              storyState.data["currentSection"] === 2
-                ? theme.transitions.duration.standard
-                : 0
-            }
-          />
-          {storylets.values.map((element, index) => (
-            <Fade
-              key={element.key}
-              in={
-                !Boolean(storyState.data["currentSection"]) &&
-                element.key === storyState.currentStorylet
-              }
-              mountOnEnter
-              unmountOnExit
-            >
-              <Box sx={{ display: "flex", flexGrow: 1 }}>
-                {element.storylet}
-              </Box>
-            </Fade>
-          ))}
-
+        <StatusBar
+          onMenuClick={() => setOpenMenu(true)}
+          title={getTitle()}
+          titleTimeout={
+            storyState.data["currentSection"] === 1 ||
+            storyState.data["currentSection"] === 2
+              ? theme.transitions.duration.standard
+              : 0
+          }
+        />
+        {storylets.values.map((element, index) => (
           <Fade
+            key={element.key}
+            in={
+              !Boolean(storyState.data["currentSection"]) &&
+              element.key === storyState.currentStorylet
+            }
+            mountOnEnter
+            unmountOnExit
+          >
+            <Container maxWidth="sm" openMenu={openMenu}>
+              {element.storylet}
+            </Container>
+          </Fade>
+        ))}
+
+        {/* <Fade
             in={storyState.data["currentSection"] === 1}
             mountOnEnter
             style={{
@@ -130,8 +131,9 @@ export const StoryProvider = (props) => {
             >
               {Recuerdos.storylet}
             </Box>
-          </Fade>
-        </Container>
+          </Fade> */}
+
+        {children}
 
         <Menu
           onClose={() => setOpenMenu(false)}

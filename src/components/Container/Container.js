@@ -52,7 +52,7 @@ const Container = React.forwardRef((props, ref) => {
       }}
     >
       <Offset />
-      <Divider />
+      {/* <Divider /> */}
       <Box
         ref={ref}
         sx={{
