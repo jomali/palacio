@@ -10,10 +10,10 @@ import Pasillo from "./Pasillo";
 
 const Banno = () => {
   const options = (story) => [
-    <Option inactive={story.hasVisited(ElEspejo.key)} storylet={ElEspejo.key}>
+    <Option inactive={story.hasVisited(ElEspejo)} storylet={ElEspejo}>
       Mirar espejo
     </Option>,
-    <Option storylet={Pasillo.key}>Ir al pasillo</Option>,
+    <Option storylet={Pasillo}>Ir al pasillo</Option>,
   ];
 
   return (

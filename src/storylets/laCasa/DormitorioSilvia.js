@@ -37,7 +37,7 @@ import Pasillo from "./Pasillo";
 const DormitorioSilvia = () => {
   const story = useStory();
 
-  const options = () => [<Option storylet={Pasillo.key}>Ir al pasillo</Option>];
+  const options = () => [<Option storylet={Pasillo}>Ir al pasillo</Option>];
 
   return (
     <Storylet options={options}>

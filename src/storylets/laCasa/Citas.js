@@ -5,12 +5,10 @@ import Storylet from "components/Storylet";
 import Recibidor from "./Recibidor";
 
 const Citas = () => {
+  const options = () => [<Option storylet={Recibidor}>Continuar</Option>];
+
   return (
-    <Storylet
-      options={(story) => [
-        <Option onClick={() => story.go(Recibidor.key)}>Continuar</Option>,
-      ]}
-    >
+    <Storylet options={options}>
       <Emphasis>
         «Y entro en los campos y anchos palacios de la memoria, donde están los
         tesoros de innumerables imágenes de toda clase de cosas acarreadas por

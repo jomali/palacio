@@ -9,7 +9,7 @@ const Cristalera = () => {
   return (
     <Storylet
       options={(story) => [
-        <Option onClick={() => story.go(Recibidor.key)}>Continuar</Option>,
+        <Option onClick={() => story.move(Recibidor)}>Continuar</Option>,
       ]}
     >
       Por un momento permanece en pie en silencio, abstraída por segunda vez hoy

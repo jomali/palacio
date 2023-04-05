@@ -45,8 +45,8 @@ import Recibidor from "./Recibidor";
 
 const PatioDelantero = () => {
   const options = () => [
-    <Option storylet={Recibidor.key}>Entrar en la casa</Option>,
-    <Option storylet={Coche.key}>Abandonar la casa</Option>,
+    <Option storylet={Recibidor}>Entrar en la casa</Option>,
+    <Option storylet={Coche}>Abandonar la casa</Option>,
   ];
 
   return (

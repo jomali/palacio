@@ -51,10 +51,14 @@ const StatusBar = (props) => {
               {debouncedTitle}
             </Typography>
           </Fade>
-
           <Gap />
-          <IconButton aria-label="menu" edge="end" onClick={onMenuClick}>
-            <MenuRoundedIcon />
+          <IconButton
+            aria-label="menu"
+            edge="end"
+            onClick={onMenuClick}
+            size="medium"
+          >
+            <MenuRoundedIcon fontSize="inherit" />
           </IconButton>
         </Toolbar>
       </AppBar>

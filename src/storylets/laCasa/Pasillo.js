@@ -8,12 +8,10 @@ import Recibidor from "./Recibidor";
 
 const Pasillo = () => {
   const options = () => [
-    <Option storylet={Recibidor.key}>Bajar al recibidor</Option>,
-    <Option storylet={Banno.key}>Entrar al baño</Option>,
-    <Option storylet={DormitorioSilvia.key}>
-      Entrar al dormitorio de Silvia
-    </Option>,
-    <Option storylet={DormitorioPrincipal.key}>
+    <Option storylet={Recibidor}>Bajar al recibidor</Option>,
+    <Option storylet={Banno}>Entrar al baño</Option>,
+    <Option storylet={DormitorioSilvia}>Entrar al dormitorio de Silvia</Option>,
+    <Option storylet={DormitorioPrincipal}>
       Entrar al dormitorio de su padre
     </Option>,
   ];

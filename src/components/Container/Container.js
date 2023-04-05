@@ -5,10 +5,6 @@ import { styled, useTheme } from "@mui/material/styles";
 import PropTypes from "prop-types";
 // import { DRAWER_WIDTH } from "../Drawer";
 
-export const PADDING_DEFAULT = 3;
-export const PADDING_SM = 2;
-export const PADDING_XS = 1;
-
 const Offset = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   width: "100%",
@@ -59,11 +55,7 @@ const Container = React.forwardRef((props, ref) => {
           alignSelf: "center",
           display: "flex",
           flexGrow: 1,
-          margin: {
-            xs: theme.spacing(PADDING_XS),
-            sm: theme.spacing(PADDING_SM),
-            md: theme.spacing(PADDING_DEFAULT),
-          },
+          margin: 0,
           maxWidth: {
             xs: "100%",
             sm: maxWidth === "sm" ? theme.breakpoints.values.sm : undefined,
@@ -78,11 +70,7 @@ const Container = React.forwardRef((props, ref) => {
             lg: maxWidth === "lg" ? theme.breakpoints.values.lg : undefined,
             xl: maxWidth === "xl" ? theme.breakpoints.values.xl : undefined,
           },
-          padding: {
-            xs: theme.spacing(PADDING_XS),
-            sm: theme.spacing(PADDING_SM),
-            md: theme.spacing(PADDING_DEFAULT),
-          },
+          padding: 0,
           position: "relative",
           ...sx,
         }}

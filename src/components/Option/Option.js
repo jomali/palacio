@@ -14,6 +14,7 @@ const Option = (props) => {
     difficulty,
     inactive,
     onClick = () => null,
+    size = "medium",
     storylet,
     variant = "default",
     ...otherProps
@@ -54,7 +55,13 @@ const Option = (props) => {
   return !inactive ? (
     <Button
       color={getColor()}
-      onClick={() => (Boolean(storylet) ? story.go(storylet) : onClick())}
+      onClick={() => {
+        if (Boolean(story)) {
+          story.move(storylet);
+        }
+        onClick();
+      }}
+      size={size}
       startIcon={getIcon()}
       variant={buttonVariant}
       {...otherProps}
@@ -69,7 +76,11 @@ Option.propTypes = {
   difficulty: PropTypes.number,
   inactive: PropTypes.bool,
   onClick: PropTypes.func,
-  storylet: PropTypes.string,
+  size: PropTypes.oneOf(["large", "medium", "small"]),
+  storylet: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }),
   variant: PropTypes.oneOf([
     "default",
     "intelligence",

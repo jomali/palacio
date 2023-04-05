@@ -5,9 +5,7 @@ import Storylet from "components/Storylet";
 import Banno from "./Banno";
 
 const Espejo = () => {
-  const options = () => [
-    <Option storylet={Banno.key}>Apartar la mirada</Option>,
-  ];
+  const options = () => [<Option storylet={Banno}>Apartar la mirada</Option>];
 
   return (
     <Storylet options={options}>
