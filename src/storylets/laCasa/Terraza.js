@@ -6,8 +6,8 @@ import Cocina from "./Cocina";
 
 const Terraza = () => {
   const options = () => [
-    <Option storylet={Cocina.key}>Entrar a la cocina</Option>,
-    <Option storylet={Cala.key}>Bajar a la cala</Option>,
+    <Option storylet={Cocina}>Entrar a la cocina</Option>,
+    <Option storylet={Cala}>Bajar a la cala</Option>,
   ];
 
   return (

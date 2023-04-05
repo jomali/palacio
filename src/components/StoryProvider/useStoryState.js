@@ -10,7 +10,7 @@ const ACTION = {
   update: "update",
 };
 
-export default (initialStorylet, initialState = {}) => {
+export default (initialStorylet = {}, initialState = {}) => {
   const theme = useTheme();
 
   const initialStoryState = {
@@ -19,7 +19,7 @@ export default (initialStorylet, initialState = {}) => {
     },
     restart: false,
     storylets: {
-      current: initialStorylet,
+      current: { key: initialStorylet.key, title: initialStorylet.title },
       next: null,
       visited: new Set(),
     },
@@ -78,10 +78,10 @@ export default (initialStorylet, initialState = {}) => {
   );
 
   React.useEffect(() => {
-    if (Boolean(nextStorylet)) {
+    if (Boolean(nextStorylet?.key)) {
       dispatch({ type: ACTION.transitionCompleted });
     }
-  }, [nextStorylet]);
+  }, [nextStorylet?.key]);
 
   const restart = useDebounce(
     storyState.restart,
@@ -95,15 +95,18 @@ export default (initialStorylet, initialState = {}) => {
   }, [restart]);
 
   return {
-    currentStorylet: storyState.storylets.current,
-    data: storyState.other,
-    hasVisited: (storyletKey) => storyState.storylets.visited.has(storyletKey),
-    onMove: (storyletKey) =>
+    currentStorylet: storyState.storylets.current || {},
+    onMove: (storylet) =>
       dispatch({
         type: ACTION.transitionTriggered,
-        payload: storyletKey,
+        payload: Boolean(storylet)
+          ? { key: storylet.key, title: storylet.title }
+          : null,
       }),
     onRestart: () => dispatch({ type: ACTION.restartTriggered }),
+
+    data: storyState.other,
+    hasVisited: (storyletKey) => storyState.storylets.visited.has(storyletKey),
     onUpdate: (newValue = {}) =>
       dispatch({ type: ACTION.update, payload: newValue }),
   };

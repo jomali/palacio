@@ -43,8 +43,8 @@ const Salon = () => {
   const options = () => [
     // <Option>Examinar la estantería</Option>,
     // <Option>Ojear los vinilos</Option>,
-    <Option storylet={Recibidor.key}>Regresar al recibidor</Option>,
-    <Option storylet={Cocina.key}>Ir a la cocina</Option>,
+    <Option storylet={Recibidor}>Regresar al recibidor</Option>,
+    <Option storylet={Cocina}>Ir a la cocina</Option>,
   ];
 
   return (

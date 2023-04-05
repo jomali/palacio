@@ -24,8 +24,8 @@ import Terraza from "./Terraza";
 
 const Cocina = () => {
   const options = () => [
-    <Option storylet={Terraza.key}>Salir a la terraza</Option>,
-    <Option storylet={Salon.key}>Ir al salón</Option>,
+    <Option storylet={Terraza}>Salir a la terraza</Option>,
+    <Option storylet={Salon}>Ir al salón</Option>,
   ];
 
   return (

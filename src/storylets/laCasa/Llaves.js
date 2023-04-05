@@ -7,7 +7,7 @@ const Llaves = () => {
   return (
     <Storylet
       options={(story) => [
-        <Option onClick={() => story.go(Recibidor.key)}>
+        <Option onClick={() => story.move(Recibidor)}>
           Bajar al recibidor
         </Option>,
       ]}

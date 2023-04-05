@@ -5,12 +5,10 @@ import Storylet from "components/Storylet";
 import Citas from "./Citas";
 
 const LaCasa = () => {
+  const options = () => [<Option storylet={Citas}>Continuar</Option>];
+
   return (
-    <Storylet
-      options={(story) => [
-        <Option onClick={() => story.go(Citas.key)}>Continuar</Option>,
-      ]}
-    >
+    <Storylet options={options}>
       <Strong>La casa</Strong> se levanta sobre un pequeño promontorio, a apenas
       una treintena de pasos de las frías aguas del Cantábrico.
       <NewLine />

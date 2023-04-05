@@ -1,8 +1,12 @@
 import React from "react";
+import CottageRoundedIcon from "@mui/icons-material/CottageRounded";
+import PsychologyAltRoundedIcon from "@mui/icons-material/PsychologyAltRounded";
+import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Div100vh from "react-div-100vh";
 import { StoryProvider } from "components";
+import Recuerdos from "sections/Recuerdos";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -34,13 +38,10 @@ const App = () => {
       primary: {
         // "#888888", #CFF5F8
         // "#BBBBBB", #FF3FA4
-        accent: "#3c7480",
-        contrastText: "#ffffff",
-        main: "#FF3FA4",
+        main: "#b354ca",
       },
       secondary: {
-        accent: "#D26C2C",
-        main: "#1E5D89",
+        main: "#888888",
       },
       mode: "light",
     },
@@ -50,7 +51,54 @@ const App = () => {
     <Div100vh>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <StoryProvider />
+        <StoryProvider
+          menu={(story) => [
+            {
+              icon: <CottageRoundedIcon />,
+              label: "La casa",
+              onClick: () => {
+                story.onUpdate({
+                  id: "currentSection",
+                  value: undefined,
+                });
+                story.onMove();
+              },
+              selected:
+                !Boolean(story.data["currentSection"]) ||
+                story.data["currentSection"] === 0,
+            },
+            {
+              icon: <WorkRoundedIcon />,
+              label: "Contenidos del bolso",
+              onClick: () => {
+                story.onUpdate({ id: "currentSection", value: 1 });
+                story.onMove();
+              },
+              selected: story.data["currentSection"] === 1,
+            },
+            {
+              icon: <PsychologyAltRoundedIcon />,
+              label: "Recuerdos",
+              onClick: () => {
+                story.onUpdate({ id: "currentSection", value: 2 });
+                story.onMove();
+              },
+              selected: story.data["currentSection"] === 2,
+            },
+          ]}
+          title={(story) => {
+            switch (story.data["currentSection"]) {
+              case 1:
+                return "Contenidos del bolso";
+              case 2:
+                return "Memoria";
+              default:
+                return false;
+            }
+          }}
+        >
+          <Recuerdos />
+        </StoryProvider>
       </ThemeProvider>
     </Div100vh>
   );

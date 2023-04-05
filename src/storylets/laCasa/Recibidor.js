@@ -25,18 +25,12 @@ const Recibidor = () => {
   const color2 = story.state["recibidor.color2"] || colors[3];
 
   const options = () => [
-    <Option
-      inactive={story.hasVisited(Cristalera.key)}
-      storylet={Cristalera.key}
-    >
+    <Option inactive={story.hasVisited(Cristalera)} storylet={Cristalera}>
       Mirar cristalera
     </Option>,
-    <Option storylet={Salon.key}>Ir al salón</Option>,
-    <Option storylet={Pasillo.key}>Subir al piso de arriba</Option>,
-    <Option
-      inactive={!story.hasVisited(Cristalera.key)}
-      storylet={PatioDelantero.key}
-    >
+    <Option storylet={Salon}>Ir al salón</Option>,
+    <Option storylet={Pasillo}>Subir al piso de arriba</Option>,
+    <Option inactive={!story.hasVisited(Cristalera)} storylet={PatioDelantero}>
       Salir de allí
     </Option>,
   ];

@@ -61,11 +61,10 @@ const Menu = (props) => {
         }}
       >
         <DrawerHeader>
-          <IconButton onClick={onClose}>
-            <CloseRoundedIcon />
+          <IconButton onClick={onClose} size="medium">
+            <CloseRoundedIcon fontSize="inherit" />
           </IconButton>
         </DrawerHeader>
-        <Divider />
         <List>
           {values.map((element, index) => (
             <ListItem disablePadding key={`menu-item-${index}`}>

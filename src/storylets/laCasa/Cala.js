@@ -9,7 +9,7 @@ const Cala = () => {
   const story = useStory();
 
   const options = () => [
-    <Option storylet={Terraza.key}>Subir a la terraza</Option>,
+    <Option storylet={Terraza}>Subir a la terraza</Option>,
   ];
 
   const rnd = Math.floor(Math.random() * 5);

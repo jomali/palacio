@@ -5,7 +5,7 @@ import Storylet from "components/Storylet";
 import Banno from "./Banno";
 
 const ElEspejo = () => {
-  const options = () => [<Option storylet={Banno.key}>Continuar</Option>];
+  const options = () => [<Option storylet={Banno}>Continuar</Option>];
 
   return (
     <Storylet options={options}>
