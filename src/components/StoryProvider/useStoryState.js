@@ -49,7 +49,7 @@ export default (initialStorylet = {}, initialState = {}) => {
         };
       case ACTION.transitionTriggered:
         const visitedStorylets = previousState.storylets.visited;
-        visitedStorylets.add(previousState.storylets.current);
+        visitedStorylets.add(previousState.storylets.current.key);
         return {
           ...previousState,
           storylets: {
@@ -96,6 +96,7 @@ export default (initialStorylet = {}, initialState = {}) => {
 
   return {
     currentStorylet: storyState.storylets.current || {},
+    hasVisited: (storylet) => storyState.storylets.visited.has(storylet.key),
     onMove: (storylet) =>
       dispatch({
         type: ACTION.transitionTriggered,
@@ -106,7 +107,6 @@ export default (initialStorylet = {}, initialState = {}) => {
     onRestart: () => dispatch({ type: ACTION.restartTriggered }),
 
     data: storyState.other,
-    hasVisited: (storyletKey) => storyState.storylets.visited.has(storyletKey),
     onUpdate: (newValue = {}) =>
       dispatch({ type: ACTION.update, payload: newValue }),
   };

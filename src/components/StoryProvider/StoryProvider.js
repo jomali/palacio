@@ -11,55 +11,52 @@ import useStoryState from "./useStoryState";
 export const StoryContext = React.createContext();
 
 export const StoryProvider = (props) => {
-  const { children, menu, title } = props;
+  const { children, initialState, menu, renderTitle } = props;
 
   const theme = useTheme();
-  const storyState = useStoryState(storylets.initial);
+  const storyState = useStoryState(storylets.initial, initialState);
 
   const [openMenu, setOpenMenu] = React.useState(false);
 
   const [openRestartConfirmation, setOpenRestartConfirmation] =
     React.useState(false);
 
-  const getTitle = () => {
-    const result = title(storyState);
-    return result || storyState.currentStorylet.title;
+  const story = {
+    currentStorylet: storyState.currentStorylet,
+    data: storyState.data,
+    hasVisited: storyState.hasVisited,
+    move: (storylet) => {
+      setOpenMenu(false);
+      setOpenRestartConfirmation(false);
+      storyState.onMove(storylet);
+    },
+    restart: (force) => {
+      setOpenMenu(false);
+      if (force) {
+        storyState.onRestart();
+      } else {
+        setOpenRestartConfirmation(true);
+      }
+    },
+    update: storyState.onUpdate,
+    //
+    changeTheme: (themeKey) => null,
+    state: storyState.data,
   };
 
   return (
-    <StoryContext.Provider
-      value={{
-        move: (storylet) => {
-          setOpenMenu(false);
-          setOpenRestartConfirmation(false);
-          storyState.onMove(storylet);
-        },
-        //
-        changeTheme: (themeKey) => null,
-        hasVisited: storyState.hasVisited,
-        restart: (force) => {
-          setOpenMenu(false);
-          if (force) {
-            storyState.onRestart();
-          } else {
-            setOpenRestartConfirmation(true);
-          }
-        },
-        setTitle: (newTitle) => null,
-        state: storyState.data,
-        update: storyState.onUpdate,
-      }}
-    >
+    <StoryContext.Provider value={story}>
       <ThemeProvider theme={theme}>
         <StatusBar
           onMenuClick={() => setOpenMenu(true)}
-          title={getTitle()}
-          titleTimeout={
-            storyState.data["currentSection"] === 1 ||
-            storyState.data["currentSection"] === 2
-              ? theme.transitions.duration.standard
-              : 0
+          title={
+            renderTitle(storyState.data) || storyState.currentStorylet.title
           }
+          TitleProps={{
+            timeout:
+              renderTitle(storyState.data) &&
+              theme.transitions.duration.standard,
+          }}
         />
         {storylets.values.map((element, index) => (
           <Fade
@@ -77,7 +74,7 @@ export const StoryProvider = (props) => {
           </Fade>
         ))}
 
-        {children}
+        {typeof children === "function" ? children(story) : children}
 
         <Menu
           onClose={() => setOpenMenu(false)}

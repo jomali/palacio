@@ -2,16 +2,23 @@ import React from "react";
 import { NewLine } from "components";
 import Option from "components/Option/Option";
 import Storylet from "components/Storylet";
+import memory from "sections/memories/memory";
+import useMemories from "sections/memories/useMemories";
 import Recibidor from "./Recibidor";
 
 const Cristalera = () => {
-  // TODO - desbloquear recuerdo de la ceremonia
+  const memories = useMemories();
+
+  React.useEffect(
+    () => memories.unlock(memory.vidrieras),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  const options = () => [<Option storylet={Recibidor}>Continuar</Option>];
+
   return (
-    <Storylet
-      options={(story) => [
-        <Option onClick={() => story.move(Recibidor)}>Continuar</Option>,
-      ]}
-    >
+    <Storylet options={options}>
       Por un momento permanece en pie en silencio, abstraída por segunda vez hoy
       en la refracción de la luz y las motas de polvo en suspensión. Todo ha
       terminado. Ahora que ya no tiene nada más que hacer aquí puede regresar a
