@@ -45,7 +45,8 @@ const StatusContainer = styled(Box)(({ theme }) => ({
 }));
 
 const MemoryCard = (props) => {
-  const { name, options, subtitle, status, title, ...otherProps } = props;
+  const { name, onClick, options, subtitle, status, title, ...otherProps } =
+    props;
   const theme = useTheme();
 
   const matches = useMediaQuery(theme.breakpoints.up("md"));
@@ -55,7 +56,7 @@ const MemoryCard = (props) => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        ...(status === "new" && {
+        ...(status === "highlight" && {
           borderColor: theme.palette.primary.main,
         }),
       }}
@@ -65,21 +66,28 @@ const MemoryCard = (props) => {
       <Box sx={{ height: 150 }}>
         <Image
           alt={name}
-          disabled={status === "disabled"}
-          src={`/assets/${name}.png`}
+          disabled={status === "locked"}
+          src={`${process.env.PUBLIC_URL}/assets/${name}.png`}
           {...(Boolean(options) && {
             style: options,
           })}
         />
       </Box>
       <Contents>
-        <Text disabled={status === "disabled"} gutterBottom>
+        <Text
+          component="div"
+          disabled={status === "locked"}
+          gutterBottom
+          sx={{ fontWeight: theme.typography.fontWeightBold }}
+          variant="subtitle1"
+        >
           {title}
         </Text>
         <Text
           color="text.secondary"
-          disabled={status === "disabled"}
+          disabled={status === "locked"}
           gutterBottom
+          variant="subtitle2"
         >
           {subtitle}
         </Text>
@@ -87,24 +95,30 @@ const MemoryCard = (props) => {
           <StatusContainer>
             {status !== "default" && (
               <Chip
-                color={status === "new" ? "primary" : "default"}
-                disabled={status === "disabled"}
+                color={status === "highlight" ? "primary" : "default"}
+                disabled={status === "locked"}
                 label={
-                  status === "new"
+                  status === "highlight"
                     ? "Nuevo"
                     : status === "viewed"
                     ? "Visto"
-                    : status === "disabled"
+                    : status === "locked"
                     ? "Bloqueado"
                     : ""
                 }
                 size={matches ? "medium" : "small"}
                 sx={{ width: "fit-content" }}
+                variant="outlined"
               />
             )}
           </StatusContainer>
 
-          <Button disabled={status === "disabled"} variant={"outlined"}>
+          <Button
+            disableElevation
+            disabled={status === "locked"}
+            onClick={onClick}
+            variant="contained"
+          >
             Recordar
           </Button>
         </Stack>

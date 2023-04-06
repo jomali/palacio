@@ -2,17 +2,21 @@ import React from "react";
 import { NewLine } from "components";
 import Option from "components/Option/Option";
 import Storylet from "components/Storylet";
-import Recibidor from "../laCasa/Recibidor";
+import useMemories from "sections/memories/useMemories";
 
 const LaCeremonia = () => {
+  const memories = useMemories();
+
+  const options = () => [
+    <Option buttonVariant="contained" onClick={() => memories.finish()}>
+      Regresar al presente
+    </Option>,
+  ];
+
   return (
-    <Storylet
-      options={(story) => [
-        <Option onClick={() => story.move(Recibidor)}>Continuar</Option>,
-      ]}
-    >
+    <Storylet options={options}>
       Ha cumplido con sus obligaciones por la mañana. Se ha encontrado con gente
-      a la que no veía desde hacía años y a la que recordaba solo a medias, y
+      a la que no veía desde hacía años y a la que recordaba sólo a medias, y
       con muchos otros a los que directamente o bien no conocía o no recordaba
       en absoluto. Todos la han saludado afectuosamente.
       <NewLine />
@@ -26,7 +30,7 @@ const LaCeremonia = () => {
       insistían en acompañarla, y ha recorrido a solas las viejas carreteras
       sacudidas por aquel viento cargado de olores viejos.
       <NewLine />
-      Hasta llegar a la vieja casa de sus padres
+      Hasta llegar a la vieja casa de sus padres.
     </Storylet>
   );
 };

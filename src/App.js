@@ -6,11 +6,16 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Div100vh from "react-div-100vh";
 import { StoryProvider } from "components";
-import Recuerdos from "sections/Recuerdos";
+import { NotificationProvider } from "components/NotificationProvider";
+import memory from "sections/memories/memory";
+import Recuerdos from "sections/memories/Recuerdos";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+
+const INVENTORY_SECTION = 1;
+const MEMORIES_SECTION = 2;
 
 const App = () => {
   const theme = createTheme({
@@ -51,54 +56,67 @@ const App = () => {
     <Div100vh>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <StoryProvider
-          menu={(story) => [
-            {
-              icon: <CottageRoundedIcon />,
-              label: "La casa",
-              onClick: () => {
-                story.onUpdate({
-                  id: "currentSection",
-                  value: undefined,
-                });
-                story.onMove();
+        <NotificationProvider autoHideDuration={2000}>
+          <StoryProvider
+            initialState={{ memories: Object.values(memory) }}
+            menu={(story) => [
+              {
+                icon: <CottageRoundedIcon />,
+                label: "La casa",
+                onClick: () => {
+                  story.onUpdate({
+                    id: "currentSection",
+                    value: undefined,
+                  });
+                  story.onMove();
+                },
+                selected:
+                  !Boolean(story.data["currentSection"]) ||
+                  story.data["currentSection"] === 0,
               },
-              selected:
-                !Boolean(story.data["currentSection"]) ||
-                story.data["currentSection"] === 0,
-            },
-            {
-              icon: <WorkRoundedIcon />,
-              label: "Contenidos del bolso",
-              onClick: () => {
-                story.onUpdate({ id: "currentSection", value: 1 });
-                story.onMove();
+              {
+                icon: <WorkRoundedIcon />,
+                label: "Contenidos del bolso",
+                onClick: () => {
+                  story.onUpdate({
+                    id: "currentSection",
+                    value: INVENTORY_SECTION,
+                  });
+                  story.onMove();
+                },
+                selected: story.data["currentSection"] === INVENTORY_SECTION,
               },
-              selected: story.data["currentSection"] === 1,
-            },
-            {
-              icon: <PsychologyAltRoundedIcon />,
-              label: "Recuerdos",
-              onClick: () => {
-                story.onUpdate({ id: "currentSection", value: 2 });
-                story.onMove();
+              {
+                icon: <PsychologyAltRoundedIcon />,
+                label: "Recuerdos",
+                onClick: () => {
+                  story.onUpdate({
+                    id: "currentSection",
+                    value: MEMORIES_SECTION,
+                  });
+                  story.onMove();
+                },
+                selected: story.data["currentSection"] === MEMORIES_SECTION,
               },
-              selected: story.data["currentSection"] === 2,
-            },
-          ]}
-          title={(story) => {
-            switch (story.data["currentSection"]) {
-              case 1:
-                return "Contenidos del bolso";
-              case 2:
-                return "Memoria";
-              default:
-                return false;
-            }
-          }}
-        >
-          <Recuerdos />
-        </StoryProvider>
+            ]}
+            renderTitle={(storyData) => {
+              switch (storyData["currentSection"]) {
+                case INVENTORY_SECTION:
+                  return "Contenidos del bolso";
+                case MEMORIES_SECTION:
+                  return "Recuerdos";
+                default:
+                  return false;
+              }
+            }}
+          >
+            {(story) => (
+              <Recuerdos
+                visible={story.data["currentSection"] === MEMORIES_SECTION}
+              />
+            )}
+          </StoryProvider>
+        </NotificationProvider>
       </ThemeProvider>
     </Div100vh>
   );

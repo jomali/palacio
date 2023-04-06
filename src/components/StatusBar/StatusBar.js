@@ -30,11 +30,10 @@ const Gap = styled("span")(() => ({
 }));
 
 const StatusBar = (props) => {
-  const { onMenuClick, title, titleTimeout = 0 } = props;
+  const { onMenuClick, title, TitleProps = {} } = props;
 
   const theme = useTheme();
-
-  const debouncedTitle = useDebounce(title, titleTimeout);
+  const debouncedTitle = useDebounce(title, TitleProps.timeout || 0);
 
   return (
     <ElevationScroll>

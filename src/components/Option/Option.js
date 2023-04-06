@@ -55,6 +55,7 @@ const Option = (props) => {
   return !inactive ? (
     <Button
       color={getColor()}
+      disableElevation
       onClick={() => {
         if (Boolean(story)) {
           story.move(storylet);
